@@ -10,6 +10,7 @@ def dns_server(hostname_mapping: dict[str, str], port: int = 53) -> None:
     normalized_mapping = {k.lower(): v for k, v in hostname_mapping.items()}
 
     resolved_value = None
+    n = 0
     try:
         while True:
             data, addr = server_socket.recvfrom(512)
@@ -37,7 +38,7 @@ def dns_server(hostname_mapping: dict[str, str], port: int = 53) -> None:
                     # Add a CNAME record if the query type is CNAME or if it's not a valid IP (assuming it's a CNAME by default)
                     response.add_answer(RR(qname, QTYPE.CNAME, rdata=CNAME(resolved_value), ttl=60))
 
-            print("Request from", addr , "->", resolved_value)
+            print("Request from", addr , ":", qname, "->", resolved_value)
             server_socket.sendto(response.pack(), addr)
 
     except KeyboardInterrupt:
@@ -53,7 +54,7 @@ def is_valid_ip(ip: str) -> bool:
 if __name__ == "__main__":
     # Example hostname to IP/CNAME mapping
     mapping = {
-        "example.com": "93.184.216.34",  # A record
+        "example.com": "169.254.169.254",  # A record
         "www.example.com": "example.com",  # CNAME record
     }
 
