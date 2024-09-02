@@ -1,12 +1,14 @@
+# minidns
+
 A minimal DNS server to test SSRFs and TOCTOU DNS bugs
 
-# Install
+## Install
 
 ```sh
 pip install -r requirements.txt
 ```
 
-# Usage:
+## Usage:
 
 You can add your records directly in dns.py's `__main__`
 
