@@ -1,6 +1,6 @@
 # minidns
 
-A minimal DNS server to test SSRFs and TOCTOU DNS bugs
+A minimal DNS server to test SSRFs and TOCTOU bugs
 
 ## Install
 
